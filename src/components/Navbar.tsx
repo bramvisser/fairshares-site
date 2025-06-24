@@ -1,12 +1,15 @@
 import { Box, Flex, Link, Button, Text, Image, HStack } from '@chakra-ui/react'
 import logo from '../assets/logo.png'
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import nlFlag from '../assets/nl-flag.svg'
+import ukFlag from '../assets/uk-flag.svg'
 
 const sections = [
-  { id: 'hero', label: 'Home' },
-  { id: 'services', label: 'Services' },
-  { id: 'why', label: 'Why FairShares' },
-  { id: 'about', label: 'About' },
+  { id: 'hero', label: 'navbar_home' },
+  { id: 'services', label: 'navbar_services' },
+  { id: 'why', label: 'navbar_why' },
+  { id: 'about', label: 'navbar_about' },
 ]
 
 const scrollToSection = (id: string) => {
@@ -17,6 +20,7 @@ const scrollToSection = (id: string) => {
 }
 
 const Navbar = () => {
+  const { t, i18n } = useTranslation()
   const [active, setActive] = useState('hero')
 
   useEffect(() => {
@@ -35,13 +39,17 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng)
+  }
+
   return (
     <Box bg="white" px={4} boxShadow="sm" position="sticky" top={0} zIndex={10}>
       <Flex h={16} alignItems="center" justifyContent="space-between" maxW="1200px" mx="auto">
         <HStack spacing={3} align="center">
           <Image src={logo} alt="FairShares Logo" h="56px" />
           <Text fontWeight="bold" color="brand.blue" fontFamily="heading" fontSize={{ base: '2xl', md: '3xl' }}>
-            FairShares
+            {t('footer_brand')}
           </Text>
         </HStack>
         <HStack as="nav" spacing={10}>
@@ -61,24 +69,41 @@ const Navbar = () => {
               cursor="pointer"
               fontFamily="heading"
             >
-              {section.label}
+              {t(section.label)}
             </Link>
           ))}
         </HStack>
-        <Button
-          bg="brand.blue"
-          color="white"
-          size="md"
-          onClick={() => scrollToSection('contact')}
-          _hover={{
-            bg: 'brand.blue',
-            transform: 'scale(1.05)',
-            borderColor: 'transparent'
-          }}
-          transition="all 0.2s"
-        >
-          Contact
-        </Button>
+        <HStack spacing={4}>
+          <Button
+            bg="brand.blue"
+            color="white"
+            size="md"
+            onClick={() => scrollToSection('contact')}
+            _hover={{
+              bg: 'brand.blue',
+              transform: 'scale(1.05)',
+              borderColor: 'transparent'
+            }}
+            transition="all 0.2s"
+          >
+            {t('navbar_contact')}
+          </Button>
+          <Box
+            as="button"
+            onClick={() => changeLanguage(i18n.language === 'nl' ? 'en' : 'nl')}
+            _hover={{
+              bg: 'transparent',
+              borderColor: 'transparent'
+            }}
+            aria-label="Switch language"
+          >
+            {i18n.language === 'nl' ? (
+              <Image src={nlFlag} alt="Dutch Flag" w="32px" />
+            ) : (
+              <Image src={ukFlag} alt="UK Flag" w="32px" />
+            )}
+          </Box>
+        </HStack>
       </Flex>
     </Box>
   )

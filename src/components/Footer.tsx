@@ -4,8 +4,10 @@ import logo from '../assets/logo.png';
 import planvivo from '../assets/planvivologo.png';
 import sandplogo from '../assets/sandplogo.jpeg';
 import { Link as RouterLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <Box bg="white" borderTop="1px" borderColor="gray.200" py={8} mt={16}>
       <Container maxW="1200px">
@@ -21,7 +23,7 @@ const Footer = () => {
           <HStack align="center" gap={1} justify={{ base: 'center', md: 'flex-start' }}>
             <Image src={logo} alt="FairShares Logo" h="28px" />
             <Text fontFamily="Montserrat Alternates, heading" color="brand.blue" fontWeight="bold" fontSize="md">
-              FairShares
+              {t('footer_brand')}
             </Text>
             <Link href="https://www.planvivo.org/fairshares" isExternal>
               <Image src={planvivo} alt="Plan Vivo Logo" h="32px" />
@@ -32,8 +34,8 @@ const Footer = () => {
           {/* Absolutely Centered Info Block */}
           <Box position="absolute" left={0} right={0} margin="auto" width="fit-content" zIndex={1}>
             <VStack spacing={1} fontSize="sm" textAlign="center">
-              <Text color="gray.600">KvK: 77435532</Text>
-              <Text color="gray.600">IBAN: NL37TRIO0788946641</Text>
+              <Text color="gray.600">{t('footer_kvk')}</Text>
+              <Text color="gray.600">{t('footer_iban')}</Text>
             </VStack>
           </Box>
 
@@ -45,13 +47,13 @@ const Footer = () => {
           </HStack>
         </Box>
         <Text textAlign="center" color="gray.400" fontSize="sm" mt={6}>
-          FairShares B.V. All rights reserved |{' '}
+          {t('footer_copyright')} |{' '}
           <Link as={RouterLink} to="/privacy" color="gray.400" _hover={{ color: 'brand.blue' }} onClick={() => window.scrollTo(0, 0)}>
-            Privacy statement
+            {t('footer_privacy')}
           </Link>
           {' '}|{' '}
           <Link as={RouterLink} to="/terms" color="gray.400" _hover={{ color: 'brand.blue' }} onClick={() => window.scrollTo(0, 0)}>
-            Terms and conditions
+            {t('footer_terms')}
           </Link>
         </Text>
       </Container>
