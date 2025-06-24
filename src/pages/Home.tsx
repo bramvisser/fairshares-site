@@ -1,60 +1,16 @@
-import { Box, Container, Heading, Text, Button, VStack, HStack, Image, Grid, GridItem, useColorModeValue, Input, Textarea, FormControl, FormLabel, Link } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
-import logo from '../assets/logo.png';
+import { Box, Container, Heading, Text, VStack, Image, Grid, useColorModeValue, Link } from '@chakra-ui/react';
 import anneloes from '../assets/anneloes.jpg';
 import bram from '../assets/bram.jpg';
 import matthijs from '../assets/matthijs.jpg';
 import david from '../assets/david.jpg';
-import { useEffect, useState } from 'react';
-import { useAnimation, useMotionValue, useTransform } from 'framer-motion';
 import SwirlBackground from '../components/SwirlBackground';
 import Footer from '../components/Footer';
-
-const MotionBox = motion(Box);
-const AnimatedSwirl = motion(Box);
-
-const useSmoothSwirl = (config: { xAmp: number, yAmp: number, scaleAmp: number, rotAmp: number, duration: number, delay?: number }) => {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const scale = useMotionValue(1);
-  const rotate = useMotionValue(0);
-  useEffect(() => {
-    let frame: number;
-    const start = performance.now();
-    function animate(now: number) {
-      const t = ((now - start) / 1000) * (2 * Math.PI) / config.duration;
-      x.set(Math.sin(t + (config.delay || 0)) * config.xAmp);
-      y.set(Math.cos(t * 0.8 + (config.delay || 0)) * config.yAmp);
-      scale.set(1 + Math.sin(t * 0.7 + (config.delay || 0)) * config.scaleAmp);
-      rotate.set(Math.sin(t * 0.6 + (config.delay || 0)) * config.rotAmp);
-      frame = requestAnimationFrame(animate);
-    }
-    frame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frame);
-  }, [x, y, scale, rotate, config]);
-  return { x, y, scale, rotate };
-};
 
 const Home = () => {
   const bgGradient = useColorModeValue(
     'linear(to-b, white, brand.lightBlue)',
     'linear(to-b, gray.900, gray.800)'
   );
-
-  // Contact form state
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Here you would send the form data to your backend or email service
-    setSubmitted(true);
-    setForm({ name: '', email: '', message: '' });
-  };
 
   return (
     <Box>

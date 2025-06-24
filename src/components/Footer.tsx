@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Link, Text, HStack, IconButton, Image, VStack, Stack } from '@chakra-ui/react';
+import { Box, Container, Link, Text, HStack, IconButton, Image, VStack } from '@chakra-ui/react';
 import { FaLinkedin, FaInstagram, FaEnvelope } from 'react-icons/fa';
 import logo from '../assets/logo.png';
 import planvivo from '../assets/planvivologo.png';

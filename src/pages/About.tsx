@@ -1,13 +1,11 @@
-import { Box, Container, Heading, Text, VStack, Image, Grid, GridItem, Flex, useColorModeValue } from '@chakra-ui/react';
+import { Box, Container, Heading, Text, VStack, Image, Grid, GridItem, useColorModeValue } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-import logo from '../assets/logo.png';
 import anneloes from '../assets/anneloes.jpg';
 import bram from '../assets/bram.jpg';
 import matthijs from '../assets/matthijs.jpg';
 import david from '../assets/david.jpg';
 
 const MotionBox = motion(Box);
-const MotionFlex = motion(Flex);
 
 const About = () => {
   const bgGradient = useColorModeValue(

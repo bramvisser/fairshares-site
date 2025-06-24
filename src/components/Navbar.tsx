@@ -1,5 +1,4 @@
 import { Box, Flex, Link, Button, Text, Image, HStack } from '@chakra-ui/react'
-import { Link as RouterLink } from 'react-router-dom'
 import logo from '../assets/logo.png'
 import { useEffect, useState } from 'react'
 
